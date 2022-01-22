@@ -67,7 +67,7 @@ class TodoMaster(db.Model):
     priority = Column(Integer)
     deadline = Column(DateTime)
     is_active = Column(Boolean, default=True)
-    created_ts = Column(DateTime, server_default=func.now())
+    created_ts = Column(DateTime, default=func.now())
     updated_ts = Column(DateTime, onupdate=func.now())
 
     def __init__(self, id, user_id, title, text, priority, deadline):
