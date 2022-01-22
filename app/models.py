@@ -7,11 +7,15 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 [DataBase Access Details]
 Below is the configuration mentioned by which the application can make connection with MySQL database
 """
-# username = 'root'
-# password = 'nandan123'
-# database_name = 'quiz_app'
-# application.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{username}:{password}@localhost/{database_name}"
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+db_type = 'mysql'
+username = 'sql6467386'
+password = 'HYXYkB1Ilu'
+server = 'sql6.freemysqlhosting.net'
+port='3306'
+database_name = 'sql6467386'
+
+application.config['SQLALCHEMY_DATABASE_URI'] = f"{db_type}://{username}:{password}@{server}:{port}/{database_name}"
+# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(application)
