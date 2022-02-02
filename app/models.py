@@ -7,16 +7,17 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 [DataBase Access Details]
 Below is the configuration mentioned by which the application can make connection with MySQL database
 """
-db_type = 'mysql'
-username = 'sql6467386'
-password = 'HYXYkB1Ilu'
-server = 'sql6.freemysqlhosting.net'
-port='3306'
-database_name = 'sql6467386'
-
-application.config['SQLALCHEMY_DATABASE_URI'] = f"{db_type}://{username}:{password}@{server}:{port}/{database_name}"
-# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
-application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# Google Cloud SQL (change this accordingly)
+PASSWORD ="NiDjllv9kxF9MrbL"
+PUBLIC_IP_ADDRESS ="35.200.133.49"
+DBNAME ="mysql"
+PROJECT_ID ="keen-autumn-340112"
+INSTANCE_NAME ="mysql"
+ 
+# configuration
+application.config["SECRET_KEY"] = "yoursecretkey"
+application.config["SQLALCHEMY_DATABASE_URI"]= f"mysql + mysqldb://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}?unix_socket =/cloudsql/{PROJECT_ID}:{INSTANCE_NAME}"
+application.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 db = SQLAlchemy(application)
 
