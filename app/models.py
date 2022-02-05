@@ -7,14 +7,13 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 [DataBase Access Details]
 Below is the configuration mentioned by which the application can make connection with MySQL database
 """
-# https://www.db4free.net/
-# https://www.db4free.net/phpMyAdmin
+
 db_type = 'mysql'
-username = 'nandan_mysql'
-password = 'nandan123'
-server = 'db4free.net'
+username = 'b4915f20a919cf'
+password = 'e8dd1584'
+server = 'us-cdbr-east-05.cleardb.net'
 port='3306'
-database_name = 'nandan_mysql'
+database_name = 'heroku_adc76ad6fc49d6e'
 
 application.config['SQLALCHEMY_DATABASE_URI'] = f"{db_type}://{username}:{password}@{server}:{port}/{database_name}"
 # application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
