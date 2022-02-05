@@ -23,7 +23,7 @@ class AddTodoRequest(Schema):
     title = fields.Str()
     text = fields.Str()
     priority = fields.Int()
-    deadline = fields.Str(missing=None, allow_none=True)
+    deadline = fields.Str()
     session_id = fields.Str()
 
 

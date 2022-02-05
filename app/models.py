@@ -65,7 +65,7 @@ class TodoMaster(db.Model):
     title = Column(String(500))
     text = Column(String(500))
     priority = Column(Integer)
-    deadline = Column(DateTime, default=None)
+    deadline = Column(DateTime)
     is_active = Column(Boolean, default=True)
     created_ts = Column(DateTime, default=func.now())
     updated_ts = Column(DateTime, onupdate=func.now())
