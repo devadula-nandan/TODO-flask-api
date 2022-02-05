@@ -108,8 +108,10 @@ def addTodo(**kwargs):
     if not session:
         return {'message': 'Unauthorized', 'status_code': 401}
     if kwargs.get("priority") in [0, 1, 2, 3]:
-        kwargs["deadline"] = datetime.strptime(
+        if kwargs["deadline"]:
+            kwargs["deadline"] = datetime.strptime(
             f'{kwargs["deadline"]}', '%Y-%m-%dT%H:%M')
+        
         newTodo = TodoMaster(
             id=generateId(),
             user_id=session.user_id,
