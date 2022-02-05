@@ -7,6 +7,8 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 [DataBase Access Details]
 Below is the configuration mentioned by which the application can make connection with MySQL database
 """
+# https://www.db4free.net/
+# https://www.db4free.net/phpMyAdmin
 db_type = 'mysql'
 username = 'nandan_mysql'
 password = 'nandan123'
