@@ -3,11 +3,14 @@ from apispec import APISpec
 from flask_restful import Api
 from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
+from flask_cors import CORS
 
 """
 Initialiasing application instance with Flask Framework and applying secret key to the application
 """
-application = Flask(__name__)
+application = Flask(__name__) 
+CORS(application)
+application.config['CORS_HEADERS'] = 'Content-Type'
 application.secret_key = 'todo-12345'
 
 """
