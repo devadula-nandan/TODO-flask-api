@@ -54,11 +54,12 @@ docs.register(LogoutAPI)
 class AddTodoAPI(MethodResource, Resource):
     @doc(description='add new todo', tags=['Todo'])
     @use_kwargs(AddTodoRequest, location=('json'))
-    @marshal_with(BaseResponse)
+    @marshal_with(AddTodoResponse)
     def post(self, **kwargs):
         response = addTodo(**kwargs)
-        return BaseResponse().dump({
+        return AddTodoResponse().dump({
             'message': response['message'],
+            'id': response['id']
         }), response['status_code']
 
 

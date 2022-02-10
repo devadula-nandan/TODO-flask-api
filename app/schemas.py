@@ -43,6 +43,9 @@ class DeleteTodoRequest(Schema):
 class BaseResponse(Schema):
     message = fields.Str()
 
+class AddTodoResponse(Schema):
+    message = fields.Str()
+    id = fields.Str()
 
 class LoginResponse(Schema):
     message = fields.Str()
