@@ -133,7 +133,7 @@ def getTodo(**kwargs):
     if kwargs.get('priority') in [0, 1, 2, 3]:
         print(kwargs.get('priority'))
         todo_rows = TodoMaster.query.filter_by(
-            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0, priority=kwargs.get('priority') if kwargs.get('active') else 0)
+            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0, priority=kwargs.get('priority') if kwargs.get('active') else 0).order_by(TodoMaster.created_ts.desc())
     else:
         todo_rows = TodoMaster.query.filter_by(
             user_id=session.user_id, is_active=1 if kwargs.get('active') else 0)
