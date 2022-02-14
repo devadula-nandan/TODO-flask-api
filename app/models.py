@@ -9,11 +9,11 @@ Below is the configuration mentioned by which the application can make connectio
 """
 
 db_type = 'mysql'
-username = 'b4915f20a919cf'
-password = 'e8dd1584'
-server = 'us-cdbr-east-05.cleardb.net'
+username = 'aytxh93xtpt15lcs'
+password = 'o12cyt24u4s65jmq'
+server = 'exbodcemtop76rnz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 port='3306'
-database_name = 'heroku_adc76ad6fc49d6e'
+database_name = 'iavsynbh0loui7go'
 
 application.config['SQLALCHEMY_DATABASE_URI'] = f"{db_type}://{username}:{password}@{server}:{port}/{database_name}"
 # application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
