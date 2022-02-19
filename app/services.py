@@ -108,7 +108,7 @@ def addTodo(**kwargs):
     if not session:
         return {'message': 'Unauthorized', 'status_code': 401}
     if kwargs.get("priority") in [0, 1, 2, 3]:
-        if kwargs["deadline"]:
+        if kwargs["deadline"] not in ["", None]:
             kwargs["deadline"] = datetime.strptime(
             f'{kwargs["deadline"]}', '%Y-%m-%dT%H:%M')
         id=generateId()
