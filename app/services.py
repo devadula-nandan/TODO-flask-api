@@ -2,7 +2,6 @@ from app.models import TodoMaster, UserMaster, UserSession
 from app import db
 import uuid
 from datetime import datetime
-
 """
 [Services Module] Implement various helper functions here as a part of api
                     implementation using MVC Template
@@ -52,11 +51,14 @@ def signUp(**kwargs):
         return {'message': 'Incomplete information provided', 'status_code': 400}
     user = getUser(username=kwargs['username'])
     if user:
-        return {'message': 'Username already exists.', "status_code": 400}
+        return {'message': 'Username already exists.', 'status_code': 400}
     user = UserMaster(
         id=generateId(),
-        **kwargs
+        name = kwargs['name'],
+        username = kwargs['username'],
+        is_admin = kwargs['is_admin']
     )
+    user.set_password(kwargs.pop('password'))
     saveData(user)
     return {
         'message': f'new {"admin" if kwargs["is_admin"] else "user"} account created.',
@@ -67,12 +69,12 @@ def signUp(**kwargs):
 def login(**kwargs):
     if not len(kwargs.values()) or None in kwargs.values():
         return {'message': 'Incomplete information provided', 'status_code': 400}
+    pw = kwargs.pop('password')
     user = getUser(**kwargs)
     if not user:
-        return {
-            'message': 'Invalid information provided',
-            'status_code': 401
-        }
+        return {'message': 'User not found.', 'status_code': 404}
+    if not user.check_password(pw):
+        return {'message': 'Incorrect password.', 'status_code': 401}
     session_id = str(uuid.uuid4())
     user_session = UserSession(
         id=generateId(),

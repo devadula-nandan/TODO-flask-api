@@ -2,6 +2,7 @@ from sqlalchemy.sql import func
 from app import application
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
+from werkzeug.security import generate_password_hash, check_password_hash
 
 """
 [DataBase Access Details]
@@ -28,18 +29,22 @@ class UserMaster(db.Model):
     id = Column(String(100), primary_key=True)
     name = Column(String(200))
     username = Column(String(200), unique=True)
-    password = Column(String(200))
+    password_hash = Column(String(200))
     is_admin = Column(Boolean, default=False)
     is_active = Column(Boolean, default=True)
     created_ts = Column(DateTime, default=func.now())
     updated_ts = Column(DateTime, onupdate=func.now())
 
-    def __init__(self, id, name, username, password, is_admin):
+    def __init__(self, id, name, username, is_admin):
         self.id = id
         self.username = username
         self.name = name
-        self.password = password
         self.is_admin = is_admin
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class UserSession(db.Model):
