@@ -5,7 +5,6 @@ from flask_apispec.views import MethodResource
 from flask_apispec import marshal_with, doc, use_kwargs
 from app.schemas import *
 from app.services import *
-from flask import make_response
 
 
 class SignUpAPI(MethodResource, Resource):
@@ -27,10 +26,7 @@ class LoginAPI(MethodResource, Resource):
     @marshal_with(LoginResponse)
     def post(self, **kwargs):
         response = login(**kwargs)
-        return LoginResponse().dump({
-            'message': response['message'],
-            'session_id': response.get('session_id')
-        }), response['status_code']
+        return LoginResponse().dump({'message': response['message']}), response['status_code'] , {'Set-Cookie': f'{response["session_id"]}'}
 
 
 api.add_resource(LoginAPI, '/login')
