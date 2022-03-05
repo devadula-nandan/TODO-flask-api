@@ -54,9 +54,9 @@ def signUp(**kwargs):
         return {'message': 'Username already exists.', 'status_code': 400}
     user = UserMaster(
         id=generateId(),
-        name = kwargs['name'],
-        username = kwargs['username'],
-        is_admin = kwargs['is_admin']
+        name=kwargs['name'],
+        username=kwargs['username'],
+        is_admin=kwargs['is_admin']
     )
     user.set_password(kwargs.pop('password'))
     saveData(user)
@@ -90,7 +90,7 @@ def login(**kwargs):
 
 
 def logout(**kwargs):
-    session_id = kwargs.get('session_id')
+    session_id = kwargs.get('token')
     if not session_id:
         return {'message': 'No session ID', 'status_code': 400}
     session = getUserSession(session_id)
@@ -112,15 +112,15 @@ def addTodo(**kwargs):
     if kwargs.get("priority") in [0, 1, 2, 3]:
         if kwargs["deadline"] not in ["", None]:
             kwargs["deadline"] = datetime.strptime(
-            f'{kwargs["deadline"]}', '%Y-%m-%dT%H:%M')
-        id=generateId()
+                f'{kwargs["deadline"]}', '%Y-%m-%dT%H:%M')
+        id = generateId()
         newTodo = TodoMaster(
             id=id,
             user_id=session.user_id,
             **kwargs
         )
         saveData(newTodo)
-        return {'message': 'New todo added.','id':id, 'status_code': 201}
+        return {'message': 'New todo added.', 'id': id, 'status_code': 201}
     else:
         return {'message': 'enter a valid priority', 'status_code': 401}
 

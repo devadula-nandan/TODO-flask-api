@@ -1,4 +1,4 @@
-from urllib import request
+from lib2to3.pgen2 import token
 from app.models import *
 from app import *
 from flask_restful import Resource
@@ -36,11 +36,10 @@ docs.register(LoginAPI)
 
 class LogoutAPI(MethodResource, Resource):
     @doc(description='Logout of the session.', tags=['User'])
-    @use_kwargs(SessionRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(BaseResponse)
     def delete(self, **kwargs):
-        token = request.cookies.get('token')
-        print(token)
+        print(kwargs["token"])
         response = logout(**kwargs)
         return BaseResponse().dump({
             'message': response['message'],
