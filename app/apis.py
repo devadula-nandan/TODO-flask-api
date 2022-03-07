@@ -27,7 +27,7 @@ class LoginAPI(MethodResource, Resource):
     @marshal_with(LoginResponse)
     def post(self, **kwargs):
         response = login(**kwargs)
-        return LoginResponse().dump({'message': response['message']}), response['status_code'], {'Set-Cookie': 'token=' + response['session_id'] + '; Path=/; Max-Age=3600' + '; Secure' + '; SameSite=None', 'Access-Control-Allow-Credentials': 'true'}
+        return LoginResponse().dump({'message': response['message']}), response['status_code'], {'Set-Cookie': 'token=' + response['session_id'] + '; Path=/; Max-Age=3600' + '; Secure' + '; SameSite=None'}
 
 
 api.add_resource(LoginAPI, '/login')
