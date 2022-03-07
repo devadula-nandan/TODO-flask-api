@@ -10,6 +10,7 @@ Initialiasing application instance with Flask Framework and applying secret key 
 """
 application = Flask(__name__) 
 CORS(application)
+cors = CORS(application, resources={r"/*": {"origins": "http://localhost:3000"}})
 application.config['CORS_HEADERS'] = 'Content-Type'
 application.secret_key = 'todo-12345'
 
