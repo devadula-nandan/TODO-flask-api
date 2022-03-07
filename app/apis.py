@@ -42,7 +42,7 @@ class LogoutAPI(MethodResource, Resource):
         response = logout(**kwargs)
         return BaseResponse().dump({
             'message': response['message'],
-        }), response['status_code'], {'Set-Cookie': 'token=; HttpOnly; Path=/' + '; Max-Age=0' + '; Secure' + '; SameSite=Strict'}
+        }), response['status_code'], {'Set-Cookie': 'token=; Path=/; Max-Age=3600 ; Secure; SameSite=None'}
 
 
 api.add_resource(LogoutAPI, '/logout')
