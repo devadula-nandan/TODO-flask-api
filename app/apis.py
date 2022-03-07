@@ -52,6 +52,7 @@ docs.register(LogoutAPI)
 class AddTodoAPI(MethodResource, Resource):
     @doc(description='add new todo', tags=['Todo'])
     @use_kwargs(AddTodoRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(AddTodoResponse)
     def post(self, **kwargs):
         response = addTodo(**kwargs)
@@ -68,8 +69,10 @@ docs.register(AddTodoAPI)
 class GetTodoAPI(MethodResource, Resource):
     @doc(description='get all todos', tags=['Todo'])
     @use_kwargs(ViewTodoRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(ListResponse)
     def post(self, **kwargs):
+        print(kwargs)
         response = getTodo(**kwargs)
         return ListResponse().dump({
             'message': response['message'],

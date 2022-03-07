@@ -106,7 +106,7 @@ def logout(**kwargs):
 def addTodo(**kwargs):
     if not len(kwargs.values()) or None in kwargs.values():
         return {'message': 'Incomplete information provided', 'status_code': 400}
-    session = getUserSession(kwargs.pop("session_id"))
+    session = getUserSession(kwargs.pop("token"))
     if not session:
         return {'message': 'Unauthorized', 'status_code': 401}
     if kwargs.get("priority") in [0, 1, 2, 3]:
@@ -128,7 +128,7 @@ def addTodo(**kwargs):
 def getTodo(**kwargs):
     if None in list(kwargs.values()):
         return {'message': 'Incomplete information provided.', 'status_code': 400}
-    session_id = kwargs.get('session_id')
+    session_id = kwargs.get('token')
     session = getUserSession(session_id)
     if not session:
         return {'message': 'Not logged in.', 'status_code': 403}

@@ -24,11 +24,9 @@ class AddTodoRequest(Schema):
     text = fields.Str()
     priority = fields.Int(missing=0, allow_none=True)
     deadline = fields.Str(missing=0, allow_none=True)
-    session_id = fields.Str()
 
 
 class ViewTodoRequest(Schema):
-    session_id = fields.Str()
     priority = fields.Int(missing=4, allow_none=True)
     active = fields.Boolean(missing=True, allow_none=True)
 
