@@ -149,7 +149,7 @@ def getTodo(**kwargs):
 def deleteTodo(**kwargs):
     if None in list(kwargs.values()):
         return {'message': 'Incomplete information provided.', 'status_code': 400}
-    id, session_id = kwargs['id'], kwargs.get('session_id')
+    id, session_id = kwargs['id'], kwargs.get('token')
     session = getUserSession(session_id)
     if not session:
         return {'message': 'Not logged in.', 'status_code': 403}

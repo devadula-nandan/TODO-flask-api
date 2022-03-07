@@ -33,7 +33,6 @@ class ViewTodoRequest(Schema):
 
 class DeleteTodoRequest(Schema):
     id = fields.Str()
-    session_id = fields.Str()
 
 # response schemas
 

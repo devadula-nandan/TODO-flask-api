@@ -87,6 +87,7 @@ docs.register(GetTodoAPI)
 class DeleteTodoAPI(MethodResource, Resource):
     @doc(description='DeleteTodoAPI', tags=['Todo'])
     @use_kwargs(DeleteTodoRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(BaseResponse)
     def post(self, **kwargs):
         response = deleteTodo(**kwargs)
