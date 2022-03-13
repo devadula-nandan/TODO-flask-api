@@ -102,7 +102,7 @@ class VerifySessionAPI(MethodResource, Resource):
     @doc(description='VerifySessionAPI', tags=['User'])
     @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(BaseResponse)
-    def post(self, **kwargs):
+    def get(self, **kwargs):
         response = verifySession(**kwargs)
         return BaseResponse().dump({
             'message': response['message']
