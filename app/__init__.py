@@ -10,7 +10,7 @@ Initialiasing application instance with Flask Framework and applying secret key 
 """
 application = Flask(__name__) 
 cors = CORS(application, resources={r"/*": {"origins": ["http://localhost:3000", "https://todo-react-sage.vercel.app"]}}, supports_credentials=True)
-application.config['CORS_HEADERS'] = 'Content-Type'
+application.config['CORS_HEADERS'] = 'Content-Type','Access-Control-Allow-Origin'
 application.secret_key = 'todo-12345'
 
 """
