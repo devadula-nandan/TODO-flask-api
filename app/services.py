@@ -120,7 +120,7 @@ def addTodo(**kwargs):
             **kwargs
         )
         saveData(newTodo)
-        return {'message': 'New todo added.', 'id': id, 'status_code': 201}
+        return {'message': 'New todo added.', 'id': id, 'status_code': 200}
     else:
         return {'message': 'enter a valid priority', 'status_code': 401}
 
