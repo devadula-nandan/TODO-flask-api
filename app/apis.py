@@ -1,4 +1,3 @@
-from lib2to3.pgen2 import token
 from app.models import *
 from app import *
 from flask_restful import Resource
@@ -98,3 +97,16 @@ class DeleteTodoAPI(MethodResource, Resource):
 
 api.add_resource(DeleteTodoAPI, '/delete.todo')
 docs.register(DeleteTodoAPI)
+
+class VerifySessionAPI(MethodResource, Resource):
+    @doc(description='VerifySessionAPI', tags=['User'])
+    @use_kwargs(SessionRequest, location=('cookies'))
+    @marshal_with(BaseResponse)
+    def post(self, **kwargs):
+        response = verifySession(**kwargs)
+        return BaseResponse().dump({
+            'message': response['message']
+        }), response['status_code']
+
+api.add_resource(VerifySessionAPI, '/verify.session')
+docs.register(VerifySessionAPI)

@@ -158,3 +158,14 @@ def deleteTodo(**kwargs):
     todo.priority = 0
     saveData(todo)
     return {'message': f'todo deleted',  'status_code': 200}
+
+def verifySession(**kwargs):
+    session_id = kwargs.get('token')
+    print(session_id)
+    if not session_id:
+        return {'message': False, 'status_code': 400}
+    session = getUserSession(session_id)
+    if session:
+        return {'message': True, 'status_code': 200}
+    else:
+        return {'message': False, 'status_code': 403}
