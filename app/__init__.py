@@ -9,7 +9,7 @@ from flask_cors import CORS
 Initialiasing application instance with Flask Framework and applying secret key to the application
 """
 application = Flask(__name__) 
-cors = CORS(application, resources={r"/*": {"origins": ["http://localhost:3000", "https://todo-react-sage.vercel.app","https://test-server-nine.vercel.app"]}}, supports_credentials=True)
+cors = CORS(application, resources={r"/*": {"origins": ["http://localhost:3000", "https://todo-react-sage.vercel.app","https://test-server-nine.vercel.app","https://ui72m7.csb.app"]}}, supports_credentials=True)
 application.config['CORS_HEADERS'] = 'Content-Type' , 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Credentials'
 application.secret_key = 'todo-12345'
 
