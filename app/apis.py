@@ -88,7 +88,7 @@ class DeleteTodoAPI(MethodResource, Resource):
     @use_kwargs(DeleteTodoRequest, location=('json'))
     @use_kwargs(SessionRequest, location=('cookies'))
     @marshal_with(BaseResponse)
-    def post(self, **kwargs):
+    def delete(self, **kwargs):
         response = deleteTodo(**kwargs)
         return BaseResponse().dump({
             'message': response['message']
