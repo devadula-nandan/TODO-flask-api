@@ -166,6 +166,7 @@ def verifySession(**kwargs):
         return {'message': False, 'status_code': 400}
     session = getUserSession(session_id)
     if session:
-        return {'message': True, 'status_code': 200}
+        user = getUser(id=session.user_id)
+        return {'message': user.username, 'status_code': 200}
     else:
         return {'message': False, 'status_code': 403}
