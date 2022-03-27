@@ -138,7 +138,7 @@ def getTodo(**kwargs):
             user_id=session.user_id, is_active=1 if kwargs.get('active') else 0, priority=kwargs.get('priority') if kwargs.get('active') else 0).order_by(TodoMaster.created_ts.desc())
     else:
         todo_rows = TodoMaster.query.filter_by(
-            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0)
+            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0,).where(TodoMaster.priority.in_([0, 1, 2, 3]))
     todos_list = []
     for todo_row in todo_rows:
         todos_list.append(todo_row)
