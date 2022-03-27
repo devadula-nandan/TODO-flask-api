@@ -34,6 +34,16 @@ class ViewTodoRequest(Schema):
 class DeleteTodoRequest(Schema):
     id = fields.Str()
 
+class UpdateTodoRequest(Schema):
+    id = fields.Str()
+    title = fields.Str()
+    text = fields.Str()
+    priority = fields.Int(missing=0, allow_none=True)
+    deadline = fields.Str(missing=0, allow_none=True)
+
+class CheckTodoRequest(Schema):
+    id = fields.Str()
+
 # response schemas
 
 

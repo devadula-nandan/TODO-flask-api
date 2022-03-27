@@ -143,7 +143,7 @@ def getTodo(**kwargs):
     for todo_row in todo_rows:
         todos_list.append(todo_row)
     todos = getTodosList(todos_list)
-    return {'message': f'user has {len(todos)} {"active" if kwargs.get("active") else "completed"} todo(s)', 'todos': todos, 'status_code': 200}
+    return {'message': f'user has {len(todos)} {"active" if kwargs.get("priority") != -1  else "completed"} todo(s)', 'todos': todos, 'status_code': 200}
 
 
 def deleteTodo(**kwargs):
@@ -170,3 +170,37 @@ def verifySession(**kwargs):
         return {'message': user.username, 'status_code': 200}
     else:
         return {'message': False, 'status_code': 403}
+
+def updateTodo(**kwargs):
+    if None in list(kwargs.values()):
+        return {'message': 'Incomplete information provided.', 'status_code': 400}
+    id, session_id = kwargs['id'], kwargs.get('token')
+    session = getUserSession(session_id)
+    if not session:
+        return {'message': 'Not logged in.', 'status_code': 403}
+    todo = TodoMaster.query.filter_by(id=id).first()
+    if not todo:
+        return {'message': 'Todo not found.', 'status_code': 404}
+    if kwargs.get('priority') in [0, 1, 2, 3]:
+        todo.priority = kwargs.get('priority')
+    if kwargs.get('deadline') not in ["", None]:
+        todo.deadline = datetime.strptime(
+            f'{kwargs.get("deadline")}', '%Y-%m-%dT%H:%M')
+    todo.title = kwargs.get('title')
+    todo.text = kwargs.get('text')
+    saveData(todo)
+    return {'message': 'Todo updated', 'status_code': 200}
+
+def checkTodo(**kwargs):
+    if None in list(kwargs.values()):
+        return {'message': 'Incomplete information provided.', 'status_code': 400}
+    id, session_id = kwargs['id'], kwargs.get('token')
+    session = getUserSession(session_id)
+    if not session:
+        return {'message': 'Not logged in.', 'status_code': 403}
+    todo = TodoMaster.query.filter_by(id=id).first()
+    if not todo:
+        return {'message': 'Todo not found.', 'status_code': 404}
+    todo.priority = -1
+    saveData(todo)
+    return {'message': 'Todo checked', 'status_code': 200}

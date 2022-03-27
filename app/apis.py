@@ -110,3 +110,31 @@ class VerifySessionAPI(MethodResource, Resource):
 
 api.add_resource(VerifySessionAPI, '/verify.session')
 docs.register(VerifySessionAPI)
+
+class UpdateTodoAPI(MethodResource, Resource):
+    @doc(description='UpdateTodoAPI', tags=['Todo'])
+    @use_kwargs(UpdateTodoRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
+    @marshal_with(BaseResponse)
+    def post(self, **kwargs):
+        response = updateTodo(**kwargs)
+        return BaseResponse().dump({
+            'message': response['message']
+        }), response['status_code']
+    
+api.add_resource(UpdateTodoAPI, '/update.todo')
+docs.register(UpdateTodoAPI)
+
+class CheckTodoAPI(MethodResource, Resource):
+    @doc(description='CheckTodoAPI', tags=['Todo'])
+    @use_kwargs(CheckTodoRequest, location=('json'))
+    @use_kwargs(SessionRequest, location=('cookies'))
+    @marshal_with(BaseResponse)
+    def post(self, **kwargs):
+        response = checkTodo(**kwargs)
+        return BaseResponse().dump({
+            'message': response['message']
+        }), response['status_code']
+
+api.add_resource(CheckTodoAPI, '/check.todo')
+docs.register(CheckTodoAPI)
