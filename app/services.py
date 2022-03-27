@@ -132,13 +132,13 @@ def getTodo(**kwargs):
     session = getUserSession(session_id)
     if not session:
         return {'message': 'Not logged in.', 'status_code': 403}
-    if kwargs.get('priority') in [0, 1, 2, 3]:
+    if kwargs.get('priority') in [-1, 0, 1, 2, 3]:
         print(kwargs.get('priority'))
         todo_rows = TodoMaster.query.filter_by(
             user_id=session.user_id, is_active=1 if kwargs.get('active') else 0, priority=kwargs.get('priority') if kwargs.get('active') else 0).order_by(TodoMaster.created_ts.desc())
     else:
         todo_rows = TodoMaster.query.filter_by(
-            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0)
+            user_id=session.user_id, is_active=1 if kwargs.get('active') else 0,priority = 0 or 1 or 2 or 3)
     todos_list = []
     for todo_row in todo_rows:
         todos_list.append(todo_row)
