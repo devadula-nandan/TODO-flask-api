@@ -204,3 +204,17 @@ def checkTodo(**kwargs):
     todo.priority = -1
     saveData(todo)
     return {'message': 'Todo checked', 'status_code': 200}
+
+def uncheckTodo(**kwargs):
+    if None in list(kwargs.values()):
+        return {'message': 'Incomplete information provided.', 'status_code': 400}
+    id, session_id = kwargs['id'], kwargs.get('token')
+    session = getUserSession(session_id)
+    if not session:
+        return {'message': 'Not logged in.', 'status_code': 403}
+    todo = TodoMaster.query.filter_by(id=id).first()
+    if not todo:
+        return {'message': 'Todo not found.', 'status_code': 404}
+    todo.priority = 0
+    saveData(todo)
+    return {'message': 'Todo unchecked', 'status_code': 200}
